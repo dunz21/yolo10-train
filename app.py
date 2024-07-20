@@ -1,6 +1,7 @@
 import cv2
 import tempfile
 from ultralytics import YOLOv10
+from datetime import datetime
 
 
 def yolov10_inference(image, video, model_id, image_size, conf_threshold):
@@ -82,7 +83,7 @@ if __name__ == '__main__':
     # wget https://github.com/THU-MIG/yolov10/releases/download/v1.1/yolov10{n/s/m/b/l/x}.pt
     WEIGHTS = 'yolov10m.pt'
     model = YOLOv10(WEIGHTS)
-    dataset = '/home/diego/Documents/MivoRepos/yolov10/datasets/yolo_persons.v5i.yolov9/data.yaml'
-    project_name = f"{dataset.split('/')[-2]}_{WEIGHTS.split('.')[0]}"
-    model.train(data=dataset, epochs=250, batch=16, imgsz=640, freeze=[0,1,2] , lr0=0.01, device='0', project='runs/train', name=project_name, exist_ok=True)
+    dataset = '/home/diego/Documents/MivoRepos/yolov10/datasets/Lorenzo di Pontti Tobalaba.v1i.yolov9/data.yaml'
+    project_name = f"{dataset.split('/')[-2]}_{WEIGHTS.split('.')[0]}_{datetime.now().strftime('%H_%M_%S')}"
+    model.train(data=dataset, epochs=250, batch=16, imgsz=640, freeze=[0,1,2] , lr0=0.01, device='0', project='runs/train', name=project_name, exist_ok=True, model=WEIGHTS)
     
